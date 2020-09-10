@@ -1,5 +1,7 @@
 # 5. Longest Palindromic Substring [Medium]
 
+The [link](https://leetcode.com/problems/longest-palindromic-substring/solution/) of question.
+
 ## Description
 
 Given a string `s`, find the longest palindromic substring in `s`. You may assume that the maximum length of `s` is 1000.
@@ -23,4 +25,4 @@ Output: "bb"
 
 ## 备注
 
-这个官方给了N多解法、有必要尝试一遍
+这个问题官方给出了多大5种解法，有必要实现一遍
