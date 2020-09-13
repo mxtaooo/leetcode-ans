@@ -1,5 +1,7 @@
 # 7. Reverse Integer [Easy]
 
+The [link](https://leetcode.com/problems/reverse-integer/) of question.
+
 ## Description
 
 Given a 32-bit signed integer, reverse digits of an integer.
