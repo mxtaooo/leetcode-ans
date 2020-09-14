@@ -45,4 +45,4 @@ Constraints:
 
 ## 备注
 
-.Net中`Dictionary<Key, Value>`类提供了`Add`和`TryAdd`方法，其中前者会在尝试添加重复键时抛出异常
+.Net中`Dictionary<Key, Value>`类提供了`Add`和`TryAdd`方法，两者都不会更新已经存在的键值对，前者会在尝试添加重复键时抛出异常，后者是在添加重复键的时候返回`false`；此外，该类还提供了访问器，即`dict[key]`，可以用于获取目标键对应的值，也可`dcit[key] = value`用于新增或更新键值对
