@@ -29,8 +29,10 @@ class Solution
             {
                 return new int[] { i, dict[target - nums[i]] };
             }
-            // Add方法对于重复KEY会抛出异常
+            // Add方法对于重复KEY会抛出异常，TryAdd会返回false。但这两者都没有更新目标键值对
+            // 对于本题目，最终返回结果只需要保证是两个目标数字即可，具体是数组中的哪个无所谓，这里没有发生更新没问题
             dict.TryAdd(nums[i], i);
+            // dict[nums[i]] = i;       // 添加或更新
         }
         throw new ArgumentException("no solution");
     }
