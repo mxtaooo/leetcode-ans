@@ -6,7 +6,7 @@ The [link](https://leetcode.com/problems/median-of-two-sorted-arrays/) of questi
 
 Given two sorted arrays `nums1` and `nums2` of size `m` and `n` respectively, return **the median** of the two sorted arrays.
 
-Follow up: The overall run time complexity should be `O(log (m+n))`.
+Follow up: The overall run time complexity should be `O(log(m+n))`.
 
 Example 1:
 ```
@@ -52,9 +52,6 @@ nums2.length == n
 
 ## 题目分析
 
-题目对于时间复杂度的要求提升了难度，简要思路如下：先找到两个数组的中位数，比较大小。然后递归取较大中位数的左半部分，较小中位数的右半部分，只是一直没有想好其结束递归的条件。
+题目对于时间复杂度的要求提升了难度，简要思路如下：先找到两个数组的中位数，比较大小。然后递归取较大中位数的左半部分，较小中位数的右半部分，只是一直没有想好其结束递归的条件。看了题解，发现忽略了中位数两侧元素个数相等的条件。
 
-看了解决方案，发现忽略了中位数两侧元素个数相等的条件，应该是加入这一条件。
-
-
-
+考虑其数学意义，有序数组中，中位数两侧数字个数相等。为两有序数组`A`和`B`定义两游标`i`和`j`，于是数组共计划分成4部分，左侧两部分作为中位数左侧，右侧两部分作为中位数右侧，由于必须保证两侧数字个数相等，因此游标`j`可由`i`计算出来，这边满足了两侧数字个数相等的条件。此外需要保证有序条件，由于两数组各自是有序的，因此只需要保证两游标两侧交叉比较依旧有序即可，找到这样的一对游标，也就找到了中位数。在此过程中需要注意游标可能是边界位置，某侧可能无值；也要注意中位数可能单个数字，也可能是某两数字的平均值，所以要注意某侧会多一个数字。
