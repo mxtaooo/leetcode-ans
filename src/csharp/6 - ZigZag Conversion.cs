@@ -34,4 +34,23 @@ public class Solution
         }
         return res.ToString();
     }
+
+    // solution-2
+    string Convert(string s, int numRows)
+    {
+        if (numRows == 1) return s;
+
+        var cycle = 2 * numRows - 2;
+        var sb = new StringBuilder();
+        for (int r = 0; r < numRows; r++)
+        {
+            for (var (i, gap) = (r, 2 * r); i < s.Length; i += gap)
+            {
+                sb.Append(s[i]);
+                gap = cycle - gap;
+                gap = gap == 0 ? cycle : gap;
+            }
+        }
+        return sb.ToString();
+    }
 }
