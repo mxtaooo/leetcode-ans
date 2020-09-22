@@ -55,3 +55,7 @@ Output: -2147483648
 Explanation: The number "-91283472332" is out of the range of a 32-bit signed integer.
              Thefore INT_MIN (−231) is returned.
 ```
+
+## 题目分析
+
+这道题应该没有什么不一样的算法，就是从左向右扫描每一个字符，首先跳过所有的空白符，对于第一个非空白符是否是正负号及数字，否则这不是个数字，然后在数字构造过程中持续关注是否溢出。
