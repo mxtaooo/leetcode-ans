@@ -1,5 +1,6 @@
 class Solution
 {
+    // 暴力穷举法
     static int MaxArea(int[] height)
     {
         var max = 0;
@@ -9,6 +10,18 @@ class Solution
             {
                 max = Math.Max(max, Math.Min(height[i], height[j]) * (j - i));
             }
+        }
+        return max;
+    }
+    // 两游标内移法
+    static int MaxArea(int[] height)
+    {
+        var max = 0;
+        for (var (i, j) = (0, height.Length - 1); i < j; )
+        {
+            max = Math.Max(max, Math.Min(height[i], height[j]) * (j - i));
+            if (height[i] > height[j]) j--;
+            else i++;
         }
         return max;
     }
