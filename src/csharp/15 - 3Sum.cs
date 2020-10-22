@@ -1,50 +1,33 @@
 class Solution
 {
+    // correct solution
     static IList<IList<int>> ThreeSum(int[] nums)
     {
         var result = new List<IList<int>>();
+        if (nums.Length <= 2) return result;
+
         Array.Sort(nums);
-        for (var (i, j) = (0, nums.Length-1); i < j; )
+        // 循环的mutation采用do-while操作是为了确保跳过重复数字
+        for (var i = 0; i < nums.Length-2; )
         {
-            var target = 0 - nums[i] - nums[j];
-            if (target >= nums[i] && target <= nums[j])
+            for (var j = i+1; j < nums.Length-1; )
             {
-                var index = Array.BinarySearch(nums, i+1, j-i, target);
-                if (index > i && index < j)
+                var target = 0 - nums[i] - nums[j];
+                var index = Array.BinarySearch(nums, j+1, nums.Length-1-j, target);
+                if (index > 0)
                 {
-                    result.Add(new List<int>{nums[i], nums[index], nums[j]});
-                    if (j-index < index-i)
-                    {
-                        i++;
-                    }
-                    else
-                    {
-                        j--;
-                    }
+                    result.Add(new List<int>() {nums[i], nums[j], nums[index]});
                 }
-                else
+                do
                 {
-                    if (index == ~(j+1))
-                    {
-                        i++;
-                    }
-                    else
-                    {
-                        j--;
-                    }
-                }
+                    j++;
+                } while (j < nums.Length-1 && nums[j-1] == nums[j]);
             }
-            else
+
+            do
             {
-                if (target > nums[j])
-                {
-                    i++;
-                }
-                else
-                {
-                    j--;
-                }
-            }
+                i++;
+            } while (i < nums.Length - 2 && nums[i-1] == nums[i]);
         }
         return result;
     }
