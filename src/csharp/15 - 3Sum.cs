@@ -32,6 +32,54 @@ class Solution
         return result;
     }
 
+    // O(N^2) Solution
+    static IList<IList<int>> ThreeSum(int[] nums)
+    {
+        // 确保游标移动到下一个数字
+        void PreNumber(ref int index)
+        {
+            do
+            {
+                index--;
+            } while(index >= 0 && nums[index] == nums[index+1]);
+        }
+        // 确保游标移动到上一个数字
+        void NextNumber(ref int index)
+        {
+            do
+            {
+                index++;
+            } while(index < nums.Length && nums[index] == nums[index-1]);
+        }
+
+        var result = new List<IList<int>>();
+        if (nums.Length <= 2) return result;
+
+        Array.Sort(nums);
+        for (var i = 0; i < nums.Length-2; NextNumber(ref i))
+        {
+            for (var (j, k) = (i+1, nums.Length-1); j < k; )
+            {
+                var sum = nums[i] + nums[j] + nums[k];
+                if (sum > 0)
+                {
+                    PreNumber(ref k);
+                }
+                else if (sum < 0)
+                {
+                    NextNumber(ref j);
+                }
+                else
+                {
+                    result.Add(new List<int>() {nums[i], nums[j], nums[k]});
+                    NextNumber(ref j);
+                    PreNumber(ref k);
+                }
+            }
+        }
+        return result;
+    }
+
     static void Main(string[] args)
     {
         var res1 = ThreeSum(new int[]{-1,0,1,2,-1,-4});
