@@ -33,3 +33,7 @@ Constraints:
 0 <= digits.length <= 4
 digits[i] is a digit in the range ['2', '9'].
 ```
+
+## 题目分析
+
+这道题比较简单，感觉最多算是个EASY难度。构造一个MAP，遍历每个字符然后倍增追加即可…
