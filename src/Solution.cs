@@ -19,19 +19,19 @@ namespace CSharpSolution
                         stack.Push(c);
                         break;
                     case ')':
-                        if (stack.Pop() != '(') return false;
+                        if (!(stack.TryPop(out var c0) && c0 == '(')) return false;
                         break;
                     case '}':
-                        if (stack.Pop() != '{') return false;
+                        if (!(stack.TryPop(out var c1) && c1 == '{')) return false;
                         break;
                     case ']':
-                        if (stack.Pop() != '[') return false;
+                        if (!(stack.TryPop(out var c2) && c2 == '[')) return false;
                         break;
                     default:
                         break;
                 }
             }
-            return true;
+            return stack.Count == 0;
         }
 
         static ListNode MergeTwoSortedLists(ListNode l1, ListNode l2)
