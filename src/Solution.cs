@@ -6,34 +6,6 @@ namespace CSharpSolution
 {
     class Solution
     {
-        static bool IsValid(string s)
-        {
-            var stack = new Stack<char>();
-            foreach (var c in s)
-            {
-                switch (c)
-                {
-                    case '(':
-                    case '{':
-                    case '[':
-                        stack.Push(c);
-                        break;
-                    case ')':
-                        if (!(stack.TryPop(out var c0) && c0 == '(')) return false;
-                        break;
-                    case '}':
-                        if (!(stack.TryPop(out var c1) && c1 == '{')) return false;
-                        break;
-                    case ']':
-                        if (!(stack.TryPop(out var c2) && c2 == '[')) return false;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            return stack.Count == 0;
-        }
-
         static ListNode MergeTwoSortedLists(ListNode l1, ListNode l2)
         {
             var head = new ListNode();
@@ -102,12 +74,6 @@ namespace CSharpSolution
         {
             var list = ListNode.Build(1, 2, 3, 4, 5);
             Console.WriteLine(list!.ToString());
-
-            Console.WriteLine(IsValid("()"));
-            Console.WriteLine(IsValid("()[]{}"));
-            Console.WriteLine(IsValid("([])"));
-            Console.WriteLine(IsValid("(]"));
-            Console.WriteLine(IsValid("([)]"));
 
             Console.WriteLine(MergeTwoSortedLists(ListNode.Build(1, 2, 3, 4, 5), ListNode.Build(0, 6, 7, 8, 9)).ToString());
             Console.WriteLine(MergeTwoSortedLists(ListNode.Build(1, 2, 4), ListNode.Build(1, 3, 4)).ToString());
