@@ -1,6 +1,6 @@
 # 21. Merge Two Sorted Lists [Easy]
 
-The [link](https://leetcode.com/problems/valid-parentheses/) of question.
+The [link](https://leetcode.com/problems/merge-two-sorted-lists/) of question.
 
 ## Description
 
