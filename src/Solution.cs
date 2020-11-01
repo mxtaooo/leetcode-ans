@@ -6,63 +6,123 @@ namespace CSharpSolution
 {
     class Solution
     {
-        static ListNode MergeTwoSortedLists(ListNode l1, ListNode l2)
-        {
-            var head = new ListNode();
 
-            var p = head;
-            while (l1 != null && l2 != null)
+        static ListNode SwapPairs(ListNode head)
+        {
+            var holder = new ListNode(next: head);
+
+            for (var p = holder; p?.next?.next != null; p = p.next.next)
             {
-                if (l1.val <= l2.val)
+                var (pp, ppp, pppp) = (p.next, p.next.next, p.next.next.next);
+                p.next = ppp;
+                ppp.next = pp;
+                pp.next = pppp;
+            }
+            return holder.next;
+        }
+
+        // static ListNode ReverseKGroup(ListNode head, int k)
+        // {
+        //     if (k == 1) return head;
+
+        //     var holder = new ListNode(next: head);
+
+        //     for (var (p, q, gap) = (holder, holder, 0); q != null && q.next != null;)
+        //     {
+        //         if (gap == k - 1)
+        //         {
+        //             var (pp, qq) = (p.next, q.next);
+        //             var (ppp, qqq) = (pp.next, qq.next);
+        //             if (k == 2)
+        //             {
+        //                 p.next = qq;
+        //                 qq.next = pp;
+        //                 pp.next = qqq;
+
+        //                 gap = 0;
+        //                 p = pp;
+        //                 q = p;
+        //             }
+        //             else
+        //             {
+        //                 p.next = qq;
+        //                 qq.next = ppp;
+        //                 q.next = pp;
+        //                 pp.next = qqq;
+
+        //                 gap = 0;
+        //                 p = q.next;
+        //                 q = p;
+        //             }
+        //         }
+        //         else
+        //         {
+        //             gap++;
+        //             q = q.next;
+        //         }
+        //     }
+
+        //     return holder.next;
+        // }
+
+
+        static ListNode ReverseKGroup(ListNode head, int k)
+        {
+            static (ListNode, ListNode) Reverse(ListNode list)
+            {
+                if (list.next == null) return (list, list);
+
+                var (pre, cur) = (default(ListNode), list);
+                while (cur != null)
                 {
-                    p.next = l1;
-                    l1 = l1.next;
+                    var tail = cur.next;
+                    cur.next = pre;
+                    pre = cur;
+                    cur = tail;
+                }
+                return (pre, list);
+            }
+
+            if (k == 1) return head;
+
+            var holder = new ListNode(next: head);
+
+            for (var pre = holder; pre != null; )
+            {
+                var (p, c) = (pre, 0);
+                while (p?.next != null && c < k)
+                {
+                    p = p.next;
+                    c++;
+                }
+
+                if (c == k)
+                {
+                    var tail = p.next;
+                    p.next = null;
+                    var (h, t) = Reverse(pre.next);
+                    pre.next = h;
+                    t.next = tail;
+                    pre = t;
+                    c = 0;
                 }
                 else
                 {
-                    p.next = l2;
-                    l2 = l2.next;
+                    pre = null;
                 }
-                p = p.next;
             }
 
-            if (l1 != null) p.next = l1;
-
-            if (l2 != null) p.next = l2;
-
-            return head.next;
-        }
-
-        static ListNode MergeKSortedLists(ListNode[] lists)
-        {
-            if (lists.Length == 0) return default;
-
-            var result = lists[0];
-            for (int i = 1; i < lists.Length; i++)
-            {
-                result = MergeTwoSortedLists(result, lists[i]);
-            }
-            return result;
+            return holder.next;
         }
 
         static void Main(string[] args)
         {
-            var list = ListNode.Build(1, 2, 3, 4, 5);
-            Console.WriteLine(list!.ToString());
-
-            Console.WriteLine(MergeTwoSortedLists(ListNode.Build(1, 2, 3, 4, 5), ListNode.Build(0, 6, 7, 8, 9)).ToString());
-            Console.WriteLine(MergeTwoSortedLists(ListNode.Build(1, 2, 4), ListNode.Build(1, 3, 4)).ToString());
-            Console.WriteLine(MergeTwoSortedLists(ListNode.Build(1, 2, 4), ListNode.Build(1, 3, 4)).ToString());
-            Console.WriteLine(MergeTwoSortedLists(ListNode.Build(), ListNode.Build(0)).ToString());
-            Console.WriteLine(MergeTwoSortedLists(ListNode.Build(), ListNode.Build())?.ToString() ?? "null");
-
-            Console.WriteLine(MergeKSortedLists(new ListNode[] {ListNode.Build(1, 4, 5), ListNode.Build(1, 3, 4), ListNode.Build(2, 6), ListNode.Build(0)}).ToString());
-            Console.WriteLine(MergeKSortedLists(new ListNode[] {})?.ToString() ?? "null");
-            Console.WriteLine(MergeKSortedLists(new ListNode[] {ListNode.Build()})?.ToString() ?? "null");
-
-            Console.WriteLine(String.Join(',', GenerateParenthesis(1)));
-            Console.WriteLine(String.Join(',', GenerateParenthesis(2)));
-            Console.WriteLine(String.Join(',', GenerateParenthesis(3)));
+            Console.WriteLine(ReverseKGroup(ListNode.Build(1, 2, 3, 4, 5), 1).ToString());
+            Console.WriteLine(ReverseKGroup(ListNode.Build(1, 2, 3, 4, 5), 2).ToString());
+            Console.WriteLine(ReverseKGroup(ListNode.Build(1, 2, 3, 4, 5), 3).ToString());
+            Console.WriteLine(ReverseKGroup(ListNode.Build(1, 2, 3, 4, 5), 4).ToString());
+            Console.WriteLine(ReverseKGroup(ListNode.Build(1, 2, 3, 4, 5), 5).ToString());
+            Console.WriteLine(ReverseKGroup(ListNode.Build(1, 2, 3, 4, 5), 6).ToString());
 
         }
     }
