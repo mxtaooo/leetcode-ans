@@ -51,4 +51,4 @@ The number of nodes in the list is in the range `sz`.
 
 ## 题目分析
 
-<!-- todo -->
+实现一个工具方法，用于反转传入链表；然后边遍历边计数，每K个一组进行反转。
