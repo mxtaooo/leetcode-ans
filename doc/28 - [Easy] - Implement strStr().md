@@ -37,3 +37,7 @@ Constraints:
 `0 <= haystack.length`, `needle.length <= 5 * 104`
 
 `haystack` and `needle` consist of only lower-case English characters.
+
+## 题目分析
+
+这道题目解答出来不难，但总感觉优化空间很大。
