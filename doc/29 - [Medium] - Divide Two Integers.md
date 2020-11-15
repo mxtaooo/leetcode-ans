@@ -1,5 +1,7 @@
 # 29. Divide Two Integers [Medium]
 
+The [link](https://leetcode.com/problems/divide-two-integers/) of question.
+
 ## Description
 
 Given two integers `dividend` and `divisor`, divide two integers without using multiplication, division, and mod operator.
