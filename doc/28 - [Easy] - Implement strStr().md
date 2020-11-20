@@ -42,10 +42,6 @@ Constraints:
 
 这道题目相对容易，最简单直观的便是滑动窗口的思想。
 
-子串逐一比较法最简单，该思路时间复杂度为`O((N-L)L)`
+子串逐一比较法最简单，该思路时间复杂度为`O((N-L)L)`；在此基础上进行优化，例如失败匹配立即停止，避免频繁生成字符串对象，这样可以优化到最好`O((N-L)L)`最坏`O(N)`的时间复杂度。
 
-双指针法
-
-Rabin Karp-常数复杂度
-
-<!-- todo -->
+[Rabin Karp](https://leetcode-cn.com/problems/implement-strstr/solution/shi-xian-strstr-by-leetcode/)-常数复杂度思路如下：生成窗口内子串的哈希码，然后再跟`needle`字符串的哈希码做比较。该算法的问题在于如何在常数时间生成字串的哈希码，这里就很有技术含量了
