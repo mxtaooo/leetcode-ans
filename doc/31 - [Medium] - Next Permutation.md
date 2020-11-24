@@ -10,7 +10,6 @@ If such an arrangement is not possible, it must rearrange it as the lowest possi
 
 The replacement must be **in place** and use only constant extra memory.
 
-
 Example 1:
 ```
 Input: nums = [1,2,3]
@@ -40,3 +39,9 @@ Constraints:
 1 <= nums.length <= 100
 0 <= nums[i] <= 100
 ```
+
+## 题目分析
+
+没太看懂题呢。。。
+
+<!-- todo -->
