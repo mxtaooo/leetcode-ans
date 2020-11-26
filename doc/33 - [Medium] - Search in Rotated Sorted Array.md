@@ -1,6 +1,6 @@
 # 33. Search in Rotated Sorted Array [Medium]
 
-The [link](https://leetcode.com/problems/longest-valid-parentheses/) of question.
+The [link](https://leetcode.com/problems/search-in-rotated-sorted-array/) of question.
 
 ## Description
 
