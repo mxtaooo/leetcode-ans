@@ -83,7 +83,26 @@ class Solution
         }
         else
         {
-            var half = ???;
+            var sep = IsSameFlag(dividend, divisor) ? (top - bottom) : (bottom - top);
+            var half = default(int);
+            foreach (var key in dict.Keys)
+            {
+                if (key + key == sep)
+                {
+                    half = key;
+                }
+            }
+            var middle = (IsSameFlag(dividend, divisor) ? bottom : top) + half;
+            var value = (IsSameFlag(dividend, divisor) ? dict[bottom] : dict[top]) + dict[half];
+            dict[middle] = value;
+            if (value > dividend)
+            {
+                return BinarySearch(dict, dividend, divisor, (bottom, middle));
+            }
+            else
+            {
+                return BinarySearch(dict, dividend, divisor, (middle, top));
+            }
         }
     }
 
@@ -111,7 +130,15 @@ class Solution
 
         var boundary = HitBoundary(dict, dividend, divisor, IsSameFlag(dividend, divisor) ? 1 : -1);
 
-        return boundary;
+        foreach (var (key, value) in dict)
+        {
+            if (value == dividend)
+            {
+                return key;
+            }
+        }
+
+        return BinarySearch(dict, dividend, divisor, boundary > 0 ? (0, boundary): (boundary, 0));
     }
 
     static void Main(string[] args)
