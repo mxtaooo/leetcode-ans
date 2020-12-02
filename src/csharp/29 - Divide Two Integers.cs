@@ -57,6 +57,19 @@ class Solution
     // 判断两数字是否同号
     static bool IsSameFlag(int x, int y) => (x > 0 && y > 0) || (x < 0 && y < 0);
 
+    static bool IsFarFromZero(int x, int y)
+    {
+        if (!IsSameFlag(x, y)) throw new ArgumentException();
+        if (x > 0)
+        {
+            return x > y;
+        }
+        else
+        {
+            return x < y;
+        }
+    }
+
     // 被除数一路自加、尽快“放大”自身到除数的“另一侧”
     // TODO: 需要确认数字“放大”过程中的溢出情况
     static int HitBoundary(Dictionary<int, int> dict, int dividend, int divisor, int cur)
