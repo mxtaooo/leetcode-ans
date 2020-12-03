@@ -57,6 +57,7 @@ class Solution
     // 判断两数字是否同号
     static bool IsSameFlag(int x, int y) => (x > 0 && y > 0) || (x < 0 && y < 0);
 
+    // 将所有比较大小行为转为比较距离原点距离
     static bool IsFarFromZero(int x, int y)
     {
         if (!IsSameFlag(x, y)) throw new ArgumentException();
