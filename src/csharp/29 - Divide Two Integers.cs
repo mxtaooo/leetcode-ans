@@ -72,16 +72,22 @@ class Solution
 
     static int HitBoundary(Dictionary<int, int> dict, int dividend, int divisor, int cur)
     {
-        if (dividend == dict[cur] || IsFarFromZero(dict[cur], dividend))
+        if (dict[cur] == dividend || IsFarFromZero(dict[cur], dividend))
         {
             return cur;
         }
         else
         {
-            var next = cur + cur;
-            var value = dict[cur] + dict[cur];  // todo: 溢出检查
-            dict[next] = value;
-            return HitBoundary(dict, dividend, divisor, next);
+            if (dict[cur] > (int.MaxValue >> 1) || dict[cur] < (int.MinValue >> 1))
+            {
+                dict[cur - 1 + cur] = dict[cur] - dict[1] + dict[cur];
+                return cur - 1 + cur;
+            }
+            else
+            {
+                dict[cur + cur] = dict[cur] + dict[cur];
+                return HitBoundary(dict, dividend, divisor, cur+cur);
+            }
         }
     }
 
@@ -94,15 +100,7 @@ class Solution
         }
         else
         {
-            var sep = top - bottom;
-            var half = default(int);
-            foreach (var key in dict.Keys)
-            {
-                if (key + key == sep)
-                {
-                    half = key;
-                }
-            }
+            var half = (top - bottom) >> 1;
             var middle = bottom + half;
             var value = dict[bottom] + dict[half];
             dict[middle] = value;
@@ -141,12 +139,9 @@ class Solution
 
         var boundary = HitBoundary(dict, dividend, divisor, IsSameFlag(dividend, divisor) ? 1 : -1);
 
-        foreach (var (key, value) in dict)
+        if (dividend == dict[boundary] || IsFarFromZero(dividend, dict[boundary]))
         {
-            if (value == dividend)
-            {
-                return key;
-            }
+            return boundary;
         }
 
         return BinarySearch(dict, dividend, divisor, (0, boundary));
