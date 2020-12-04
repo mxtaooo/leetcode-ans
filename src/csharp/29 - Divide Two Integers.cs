@@ -57,7 +57,6 @@ class Solution
     // 判断两数字是否同号
     static bool IsSameFlag(int x, int y) => (x > 0 && y > 0) || (x < 0 && y < 0);
 
-    // 将所有比较大小行为转为比较距离原点距离
     static bool IsFarFromZero(int x, int y)
     {
         if (!IsSameFlag(x, y)) throw new ArgumentException();
@@ -71,18 +70,16 @@ class Solution
         }
     }
 
-    // 被除数一路自加、尽快“放大”自身到除数的“另一侧”
-    // TODO: 需要确认数字“放大”过程中的溢出情况
     static int HitBoundary(Dictionary<int, int> dict, int dividend, int divisor, int cur)
     {
-        if ((dividend >= 0 && dict[cur] >= dividend) || (dividend < 0 && dict[cur] <= dividend))
+        if (dividend == dict[cur] || IsFarFromZero(dict[cur], dividend))
         {
             return cur;
         }
         else
         {
             var next = cur + cur;
-            var value = dict[cur] + dict[cur];
+            var value = dict[cur] + dict[cur];  // todo: 溢出检查
             dict[next] = value;
             return HitBoundary(dict, dividend, divisor, next);
         }
@@ -91,13 +88,13 @@ class Solution
     static int BinarySearch(Dictionary<int, int> dict, int dividend, int divisor, (int, int) range)
     {
         var (bottom, top) = range;
-        if (top - bottom == 1)
+        if (Math.Abs(top - bottom) == 1)
         {
-            return IsSameFlag(dividend, divisor) ? bottom : top;
+            return bottom;
         }
         else
         {
-            var sep = IsSameFlag(dividend, divisor) ? (top - bottom) : (bottom - top);
+            var sep = top - bottom;
             var half = default(int);
             foreach (var key in dict.Keys)
             {
@@ -106,10 +103,10 @@ class Solution
                     half = key;
                 }
             }
-            var middle = (IsSameFlag(dividend, divisor) ? bottom : top) + half;
-            var value = (IsSameFlag(dividend, divisor) ? dict[bottom] : dict[top]) + dict[half];
+            var middle = bottom + half;
+            var value = dict[bottom] + dict[half];
             dict[middle] = value;
-            if (value > dividend)
+            if (IsFarFromZero(value, dividend))
             {
                 return BinarySearch(dict, dividend, divisor, (bottom, middle));
             }
@@ -152,7 +149,7 @@ class Solution
             }
         }
 
-        return BinarySearch(dict, dividend, divisor, boundary > 0 ? (0, boundary): (boundary, 0));
+        return BinarySearch(dict, dividend, divisor, (0, boundary));
     }
 
     static void Main(string[] args)
