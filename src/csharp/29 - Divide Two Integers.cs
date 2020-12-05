@@ -54,7 +54,6 @@ class Solution
 
     // ============================================
 
-    // 判断两数字是否同号
     static bool IsSameFlag(int x, int y) => (x > 0 && y > 0) || (x < 0 && y < 0);
 
     static bool IsFarFromZero(int x, int y)
@@ -70,6 +69,19 @@ class Solution
         }
     }
 
+    static bool IsSumOverFlow(int x, int y)
+    {
+        try
+        {
+            var z = checked(x + y);
+            return false;
+        }
+        catch (OverflowException)
+        {
+            return true;
+        }
+    }
+
     static int HitBoundary(Dictionary<int, int> dict, int dividend, int divisor, int cur)
     {
         if (dict[cur] == dividend || IsFarFromZero(dict[cur], dividend))
@@ -80,8 +92,25 @@ class Solution
         {
             if (dict[cur] > (int.MaxValue >> 1) || dict[cur] < (int.MinValue >> 1))
             {
-                dict[cur - 1 + cur] = dict[cur] - dict[1] + dict[cur];
-                return cur - 1 + cur;
+                if (IsSumOverFlow(dict[cur], IsSameFlag(dividend, divisor) ? dict[1] : dict[-1]))
+                {
+                    return cur;
+                }
+                else
+                {
+                    var next = default(int); 
+                    var enumration = dict[cur] > 0 ? dict.OrderByDescending(p => p.Value) : dict.OrderBy(p => p.Value);
+                    foreach (var (key, value) in enumration)
+                    {
+                        if (!IsSumOverFlow(dict[cur], dict[key]))
+                        {
+                            dict[cur + key] = dict[cur] + dict[key];
+                            next = cur + key;
+                            break;
+                        }
+                    }
+                    return HitBoundary(dict, dividend, divisor, next);
+                }
             }
             else
             {
@@ -118,6 +147,9 @@ class Solution
     static int Divide(int dividend, int divisor)
     {
         if (dividend == 0) return 0;
+        var x = dividend > 0 ? -dividend : dividend;
+        var y = divisor > 0 ? -divisor : divisor;
+        if (x > y) return 0;
         switch (divisor)
         {
             case 1:
@@ -149,6 +181,12 @@ class Solution
 
     static void Main(string[] args)
     {
+        Console.WriteLine(Divide(int.MaxValue, 2));
+        Console.WriteLine(Divide(1100540749, -1090366779));
+        Console.WriteLine(Divide(int.MaxValue / 2, int.MinValue));
+        Console.WriteLine(Divide(int.MinValue, -3));
+        Console.WriteLine(Divide(int.MaxValue, 3));
+        Console.WriteLine(Divide(int.MinValue, 2));
         Console.WriteLine(Divide(10, 3));
         Console.WriteLine(Divide(7, -3));
         Console.WriteLine(Divide(0, 1));
@@ -162,4 +200,5 @@ class Solution
         Console.WriteLine(Divide(-12, -3));
         Console.WriteLine(Divide(int.MinValue, 1));
     }
+}
 }
