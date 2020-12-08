@@ -73,14 +73,14 @@ class Solution
             return InnerFunc(val + pre.k, dividend - pre.v, divisor);
         }
 
-        // 结果溢出
-        if (dividend == int.MinValue && divisor == -1)
+        switch (divisor)
         {
-            return int.MaxValue;
-        }
-        else
-        {
-            return InnerFunc(0, dividend, divisor);
+            case 1:
+                return dividend;
+            case -1:
+                return dividend == int.MinValue ? int.MaxValue : -dividend;
+            default:
+                return InnerFunc(0, dividend, divisor);
         }
     }
 
