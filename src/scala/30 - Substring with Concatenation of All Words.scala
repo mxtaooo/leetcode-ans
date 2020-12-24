@@ -2,18 +2,19 @@ object Solution {
 
   // 当前题解存在问题、对于 "aaaaaaaaaaaaaaaaaaaaa" ["a", "a", "a" ...]这种、会出现内存问题
 
+  import scala.annotation.tailrec
+  import collection.mutable.ListBuffer
+
   def allIndexOf(s: String, value: String): List[Int] = {
-    @scala.annotation.tailrec
-    def func(result: collection.mutable.ListBuffer[Int], start: Int): collection.mutable.ListBuffer[Int] = {
+    @tailrec
+    def func(result: ListBuffer[Int], start: Int): ListBuffer[Int] = {
       val index = s.indexOf(value, start)
       if (index != -1) {
         result.addOne(index)
       }
-
-      if (index != -1 && index + value.length < s.length) func(result, start + value.length) else result
+      if (index != -1 && index + 1 < s.length) func(result, start + 1) else result
     }
-
-    val result = collection.mutable.ListBuffer.empty[Int]
+    val result = ListBuffer.empty[Int]
     func(result, 0).toList
   }
 
