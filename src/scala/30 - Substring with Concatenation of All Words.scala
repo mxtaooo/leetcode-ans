@@ -1,6 +1,8 @@
 object Solution {
-  def allIndexOf(s: String, value: String): List[Int] = {
 
+  // 当前题解存在问题、对于 "aaaaaaaaaaaaaaaaaaaaa" ["a", "a", "a" ...]这种、会出现内存问题
+
+  def allIndexOf(s: String, value: String): List[Int] = {
     @scala.annotation.tailrec
     def func(result: collection.mutable.ListBuffer[Int], start: Int): collection.mutable.ListBuffer[Int] = {
       val index = s.indexOf(value, start)
