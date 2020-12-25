@@ -12,7 +12,6 @@ namespace CSharpConsoleApp
         {
             var result = new List<int>();
             var slen = s.Length;
-            var vlen = value.Length;
 
             List<int> InnerFunc(List<int> result, int start)
             {
@@ -20,9 +19,9 @@ namespace CSharpConsoleApp
                 if (index != -1)
                 {
                     result.Add(index);
-                    if (index + vlen < slen)
+                    if (index + 1 < slen)
                     {
-                        return InnerFunc(result, start + vlen);
+                        return InnerFunc(result, start + 1);
                     }
                 }
                 return result;
