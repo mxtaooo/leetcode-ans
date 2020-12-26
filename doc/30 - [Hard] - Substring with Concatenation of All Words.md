@@ -47,3 +47,5 @@ s consists of lower-case English letters.
 <!-- 由于依赖库问题、尚未成功提交题解 -->
 
 注意到平台支持混合范式编程语言Scala、有内置的不可变相关集合、以Scala实现该解法然后提交测试、
+
+https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/solution/
