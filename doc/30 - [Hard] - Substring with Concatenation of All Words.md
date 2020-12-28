@@ -50,3 +50,5 @@ s consists of lower-case English letters.
 https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words/solution/
 
 还是存在问题、需要继续优化甚至转换思路
+
+之前解法中一直忽视了一个条件，即为单词长度都是一致的，因此不可能出现类似`["abc", "abcd"]`这种需要回溯的情况
