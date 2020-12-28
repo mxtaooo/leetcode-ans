@@ -1,6 +1,7 @@
 object Solution {
 
   // 当前题解存在问题、对于 "aaaaaaaaaaaaaaaaaaaaa" ["a", "a", "a" ...]这种、会出现内存问题
+  // 因为构造辅助数据结构太浪费内存、需要优化
 
   import scala.annotation.tailrec
   import collection.mutable.ListBuffer
