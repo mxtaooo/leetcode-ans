@@ -26,15 +26,9 @@ object Solution {
     if (dict.contains(index)) {
       val intersect = dict(index).intersect(targets)
       intersect.size match {
-        case 1 =>
+        case i if i >= 1 =>
           for (i <- intersect) {
             return isExist(index + lens(i), targets - i, lens, dict)
-          }
-        case i if i > 1 =>
-          for (i <- intersect) {
-            if (isExist(index + lens(i), targets - i, lens, dict)) {
-              return true
-            }
           }
         case _ => ()
       }
