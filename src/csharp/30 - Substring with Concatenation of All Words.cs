@@ -8,7 +8,14 @@ namespace CSharpConsoleApp
     {
         public static List<int> AllIndexOf(this string s, string value)
         {
-            var result = new List<int>();
+            // 迭代器方式生成
+            IEnumerable<int> InnerFunc0()
+            {
+                for (int i = s.IndexOf(value); i != -1; i = s.IndexOf(value, i+1))
+                {
+                    yield return i;
+                }
+            }
 
             List<int> InnerFunc(List<int> result, int start)
             {
@@ -21,7 +28,8 @@ namespace CSharpConsoleApp
                 return result;
             }
 
-            return InnerFunc(result, 0);
+            // return InnerFunc(new List<int>(), 0);
+            return new List<int>(InnerFunc0());
         }
 
         public static string Format(this List<int> list)
