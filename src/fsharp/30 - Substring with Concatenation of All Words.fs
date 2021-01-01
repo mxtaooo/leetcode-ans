@@ -16,6 +16,10 @@ type String with
         } |> List.ofSeq
     member this.AllIndexOf value = this.AllIndexOf1 value
 
+let findSubString (s: string) (words: string array) =
+    let len = words |> Array.sumBy (fun word -> word.Length)
+    let count = words |> Array.countBy id |> Map.ofArray
+
 [<EntryPoint>]
 let main argv =
     printfn "Hello World from F#!"
