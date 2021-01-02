@@ -42,6 +42,6 @@ Constraints:
 
 ## 题目分析
 
-没太看懂题呢。。。
-
 <!-- todo -->
+
+https://leetcode-cn.com/problems/next-permutation/
