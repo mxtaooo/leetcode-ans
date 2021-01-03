@@ -45,3 +45,7 @@ Constraints:
 <!-- todo -->
 
 https://leetcode-cn.com/problems/next-permutation/
+
+real question
+
+https://leetcode-cn.com/problems/next-permutation/comments/25378
