@@ -14,6 +14,10 @@ namespace CSharpConsoleApp
             }
             for (int index = nums.Length - 1; index > 0; index--)
             {
+                // 找到位置不对的地方之后、把后面最小的往前移动 ? 不对。。。
+                // 41321 42131 x
+                // 41321 42113
+                
                 if (nums[index-1] < nums[index])
                 {
                     var tmp = nums[index];
