@@ -49,3 +49,7 @@ https://leetcode-cn.com/problems/next-permutation/
 real question
 
 https://leetcode-cn.com/problems/next-permutation/comments/25378
+
+<!-- todo -->
+
+从后向前遍历、更换两数字位置
