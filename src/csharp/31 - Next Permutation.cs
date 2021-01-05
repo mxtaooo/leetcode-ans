@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace CSharpConsoleApp
 {
@@ -12,21 +10,27 @@ namespace CSharpConsoleApp
             {
                 return;
             }
+            var start = 0;
             for (int index = nums.Length - 1; index > 0; index--)
             {
-                // 找到位置不对的地方之后、把后面最小的往前移动 ? 不对。。。
-                // 41321 42131 x
-                // 41321 42113
-                
                 if (nums[index-1] < nums[index])
                 {
-                    var tmp = nums[index];
-                    nums[index] = nums[index-1];
-                    nums[index-1] = tmp;
-                    return;
+                    var (mi, min) = (index, nums[index]);
+                    for (int i = index; i < nums.Length; i++)
+                    {
+                        if (nums[i] > nums[index-1] && nums[i] < min)
+                        {
+                            mi = i;
+                            min = nums[i];
+                        }
+                    }
+                    nums[mi] = nums[index - 1];
+                    nums[index - 1] = min;
+                    start = index;
+                    break;
                 }
             }
-            Array.Sort(nums);
+            Array.Sort(nums, start, nums.Length - start);
             return;
         }
 
@@ -45,8 +49,8 @@ namespace CSharpConsoleApp
             Execute(new int[] { 3, 2, 1 });
             Execute(new int[] { 1, 1, 5 });
             Execute(new int[] { 1 });
-
-            // 132 => 213 但算出312
+            Execute(new int[] { 1, 3, 2 });
+            Execute(new int[] { 1, 3, 3 });
         }
     }
 }
