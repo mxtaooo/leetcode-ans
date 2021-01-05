@@ -52,4 +52,6 @@ https://leetcode-cn.com/problems/next-permutation/comments/25378
 
 <!-- todo -->
 
-从后向前遍历、更换两数字位置
+从后向前遍历、找到一处位置`i`，该位置为`a`其后为`b`且`a < b`，从`a`后面找到`c`，确保`c > a`且相对最小、将`c`与`a`交换位置、然后将`i`身后所有数值排序
+
+
