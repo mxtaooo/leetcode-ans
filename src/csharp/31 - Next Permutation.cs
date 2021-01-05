@@ -21,7 +21,7 @@ namespace CSharpConsoleApp
             // 说明全体数字都是从大到小排列、这是最大数字
             if (index == 0)
             {
-                Array.Sort(nums);
+                Array.Reverse(nums);
                 return;
             }
 
@@ -29,7 +29,7 @@ namespace CSharpConsoleApp
             var mi = index;
             for (int i = index; i < nums.Length; i++)
             {
-                if (nums[i] > nums[index-1] && nums[i] < nums[mi])
+                if (nums[i] > nums[index-1] && nums[i] <= nums[mi])
                 {
                     mi = i;
                 }
@@ -37,7 +37,7 @@ namespace CSharpConsoleApp
             var tmp = nums[mi];
             nums[mi] = nums[index-1];
             nums[index-1] = tmp;
-            Array.Sort(nums, index, nums.Length - index);
+            Array.Reverse(nums, index, nums.Length - index);
         }
 
         static void Execute(int[] nums)
