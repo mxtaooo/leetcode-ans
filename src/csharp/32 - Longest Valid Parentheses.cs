@@ -20,6 +20,7 @@ namespace CSharpConsoleApp
                         if (left > 0)
                         {
                             left--;
+                            // 存在问题、不应无条件延长本current
                             current += 2;
                         }
                         else
