@@ -43,7 +43,10 @@ namespace CSharpConsoleApp
             Console.WriteLine($"{LongestValidParentheses("(()")}");
             Console.WriteLine($"{LongestValidParentheses(")()())")}");
             Console.WriteLine($"{LongestValidParentheses("")}");
+            
             Console.WriteLine($"{LongestValidParentheses("()(()")}"); // error !
+            // 问题在于、当从后向前消除一对括号的时候、无法得知是否与更前方的括号成功连接
+
         }
     }
 }
