@@ -1,41 +1,121 @@
 using System;
+using System.Linq;
 
 namespace CSharpConsoleApp
 {
     class Program
     {
+        #region Error Solution
+        //static int LongestValidParentheses(string s)
+        //{
+        //    var max = 0;
+        //    var current = 0;
+        //    var left = 0;
+        //    foreach (var c in s)
+        //    {
+        //        switch (c)
+        //        {
+        //            case '(':
+        //                left++;
+        //                break;
+        //            case ')':
+        //                if (left > 0)
+        //                {
+        //                    left--;
+        //                    current += 2;
+        //                }
+        //                else
+        //                {
+        //                    max = max > current ? max : current;
+        //                    current = 0;
+        //                }
+        //                break;
+        //            default:
+        //                break;
+        //        }
+        //    }
+        //    return max > current ? max : current;
+        //}
+        #endregion
+
+        #region Brute Force Solution
+        //static int LongestValidParentheses(string s)
+        //{
+        //    bool IsValid(int start, int length)
+        //    {
+        //        var stack = 0;
+        //        for (int i = 0; i < length; i++)
+        //        {
+        //            if (s[start + i] == '(')
+        //            {
+        //                stack++;
+        //            }
+        //            else
+        //            {
+        //                if (stack > 0)
+        //                {
+        //                    stack--;
+        //                }
+        //                else
+        //                {
+        //                    return false;
+        //                }
+        //            }
+        //        }
+        //        return stack == 0;
+        //    }
+
+        //    //// 从0 -> 2 -> 4 逐渐尝试
+        //    //var max = 0;
+        //    //for (int len = 2; len <= s.Length; len += 2)
+        //    //{
+        //    //    for (int i = 0; i <= s.Length - len; i++)
+        //    //    {
+        //    //        if (IsValid(i, len))
+        //    //        {
+        //    //            max = len;
+        //    //            break;
+        //    //        }
+        //    //    }
+        //    //}
+        //    //return max;
+
+        //    // 从max -> ... -> 4 -> 2 -> 0 逐渐尝试
+        //    for (int len = s.Length % 2 == 0 ? s.Length : s.Length - 1; len >= 0; len -= 2)
+        //    {
+        //        for (int i = 0; i <= s.Length - len; i++)
+        //        {
+        //            if (IsValid(i, len))
+        //            {
+        //                return len;
+        //            }
+        //        }
+        //    }
+        //    return 0;
+        //}
+        #endregion
+
+        #region Dynamic Programming Solution
         static int LongestValidParentheses(string s)
         {
-            var max = 0;
-            var current = 0;
-            var left = 0;
-            foreach (var c in s)
+            var dp = new int[s.Length];
+            for (int i = 1; i < s.Length; i++)
             {
-                switch (c)
+                if (s[i] == ')')
                 {
-                    case '(':
-                        left++;
-                        break;
-                    case ')':
-                        if (left > 0)
-                        {
-                            left--;
-                            // 存在问题、不应无条件延长本current
-                            current += 2;
-                        }
-                        else
-                        {
-                            max = max > current ? max : current;
-                            current = 0;
-                        }
-                        break;
-                    default:
-                        break;
+                    if (s[i-1] == '(')
+                    {
+                        dp[i] = (i >= 2 ? dp[i - 2]　: 0) + 2;
+                    }
+                    else if (i - dp[i - 1] >= 1 && s[i - dp[i - 1] - 1] == '(')
+                    {
+                        dp[i] = (i - dp[i - 1] >= 2 ? dp[i - dp[i - 1] - 2] : 0) + dp[i - 1] + 2;
+                    }
                 }
             }
-
-            return max > current ? max : current;
+            return dp.Length == 0 ? 0 : dp.Max();
         }
+        #endregion
 
         static void Main(string[] args)
         {
@@ -43,10 +123,8 @@ namespace CSharpConsoleApp
             Console.WriteLine($"{LongestValidParentheses("(()")}");
             Console.WriteLine($"{LongestValidParentheses(")()())")}");
             Console.WriteLine($"{LongestValidParentheses("")}");
-            
             Console.WriteLine($"{LongestValidParentheses("()(()")}"); // error !
-            // 问题在于、当从后向前消除一对括号的时候、无法得知是否与更前方的括号成功连接
-
+            Console.WriteLine($"{LongestValidParentheses(")(((((()())()()))()(()))(")}"); // error !
         }
     }
 }
