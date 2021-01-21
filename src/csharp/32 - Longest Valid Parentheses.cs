@@ -119,29 +119,53 @@ namespace CSharpConsoleApp
         #endregion
 
         #region Stack
+        //static int LongestValidParentheses(string s)
+        //{
+        //    var max = 0;
+        //    var stack = new Stack<int>();
+        //    stack.Push(-1);
+        //    for (int i = 0; i < s.Length; i++)
+        //    {
+        //        if (s[i] == '(')
+        //        {
+        //            stack.Push(i);
+        //        }
+        //        else
+        //        {
+        //            stack.Pop();
+        //            if (stack.Count != 0)
+        //            {
+        //                max = Math.Max(max, i - stack.Peek());
+        //            }
+        //            else
+        //            {
+        //                stack.Push(i);
+        //            }
+        //        }
+        //    }
+        //    return max;
+        //}
+        #endregion
+
+        #region 2 Directions Scan
         static int LongestValidParentheses(string s)
         {
             var max = 0;
-            var stack = new Stack<int>();
-            stack.Push(-1);
+            var (left, right) = (0, 0);
             for (int i = 0; i < s.Length; i++)
             {
-                if (s[i] == '(')
-                {
-                    stack.Push(i);
-                }
-                else
-                {
-                    stack.Pop();
-                    if (stack.Count != 0)
-                    {
-                        max = Math.Max(max, i - stack.Peek());
-                    }
-                    else
-                    {
-                        stack.Push(i);
-                    }
-                }
+                left += s[i] == '(' ? 1 : 0;
+                right += s[i] == ')' ? 1 : 0;
+                max = Math.Max(max, left == right ? left + right : 0);
+                (left, right) = left >= right ? (left, right) : (0, 0);
+            }
+            (left, right) = (0, 0);
+            for (int i = s.Length - 1; i >= 0; i--)
+            {
+                left += s[i] == '(' ? 1 : 0;
+                right += s[i] == ')' ? 1 : 0;
+                max = Math.Max(max, left == right ? left + right : 0);
+                (left, right) = left <= right ? (left, right) : (0, 0);
             }
             return max;
         }
@@ -155,6 +179,7 @@ namespace CSharpConsoleApp
             Console.WriteLine($"{LongestValidParentheses("")}");
             Console.WriteLine($"{LongestValidParentheses("()(()")}"); // error !
             Console.WriteLine($"{LongestValidParentheses(")(((((()())()()))()(()))(")}"); // error !
+            Console.WriteLine($"{LongestValidParentheses("(()()")}");
         }
     }
 }
