@@ -36,3 +36,9 @@ Constraints:
 ```
 All values of `nums` are **unique**.
 `nums` is guranteed to be rotated at some pivot.
+
+## 题目分析
+
+这道题直接看好像直接从头向后找也可以？这样的时间复杂度为`O(N)`
+
+先二分查找定位到反转点、然后再二分查找定位目标值？定位反转点是否能通过二分查找进行？能保证时间复杂度`O(logN)`？
