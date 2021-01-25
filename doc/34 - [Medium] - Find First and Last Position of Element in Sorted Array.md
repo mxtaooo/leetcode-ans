@@ -1,4 +1,4 @@
-# 34.Find First and Last Position of Element in Sorted Array [Medium]
+# 34. Find First and Last Position of Element in Sorted Array [Medium]
 
 The [link](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/) of question.
 
