@@ -35,3 +35,7 @@ Constraints:
 -109 <= target <= 109
 ```
 `nums` is a non-decreasing array.
+
+## 题目分析
+
+首先二分查找定位到任一目标数字、然后以二分查找向前向后定位边界、总体保持`O(logN)`的时间复杂度
