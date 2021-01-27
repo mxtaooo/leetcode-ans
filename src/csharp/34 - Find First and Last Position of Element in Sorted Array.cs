@@ -4,10 +4,9 @@ namespace CSharpConsoleApp
 {
     class Program
     {
-        static int[] Search(int[] nums, int target)
+        static int[] SearchRange(int[] nums, int target)
         {
-
-            int Hit()
+            int BinarySearch()
             {
                 if (nums[0] == target)
                 {
@@ -42,10 +41,8 @@ namespace CSharpConsoleApp
                 return -1;
             }
 
-
-            var p = Hit();
-
-            if (p == -1)
+            var random = nums.Length == 0 ? -1 : BinarySearch();
+            if (random == -1)
             {
                 return new int[] { -1, -1 };
             }
@@ -53,30 +50,59 @@ namespace CSharpConsoleApp
             var start = 0;
             if (nums[0] != target)
             {
-                while (true)
+                var (s, e) = (1, random);
+                while (!(nums[s-1] != target && nums[s] == target))
                 {
-                    if (nums[start-1] < target)
+                    var m = (s + e) / 2;
+                    if (m == s)
                     {
-                        
+                        s++;
+                        break;
+                    }
+                    if (nums[m] == target)
+                    {
+                        e = m;
+                    }
+                    else
+                    {
+                        s = m;
                     }
                 }
+                start = s;
             }
+
+            var end = nums.Length - 1;
+            if (nums[^1] != target)
+            {
+                var (s, e) = (random, nums.Length-1);
+                while (!(nums[s + 1] != target && nums[s] == target))
+                {
+                    var m = (s + e) / 2;
+                    if (m == s)
+                    {
+                        s--;
+                        break;
+                    }
+                    if (nums[m] == target)
+                    {
+                        s = m;
+                    }
+                    else
+                    {
+                        e = m;
+                    }
+                }
+                end = s;
+            }
+            return new int[] { start, end };
         }
 
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Console.WriteLine($"{Search(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 3)}");
-
-            Console.WriteLine($"{Search(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 0)}");
-            Console.WriteLine($"{Search(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 1)}");
-
-            Console.WriteLine($"{Search(new int[] { 4, 5, 6, 7, 0, 1, 2 }, 6)}");
-            Console.WriteLine($"{Search(new int[] { 1 }, 6)}");
-            Console.WriteLine($"{Search(new int[] { 1, 3 }, 6)}");
-            Console.WriteLine($"{Search(new int[] { 1, 3 }, 0)}");
-            Console.WriteLine($"{Search(new int[] { 3, 1 }, 1)}");
-            Console.WriteLine($"{Search(new int[] { 3, 1 }, 3)}");
+            Console.WriteLine(string.Join(",", SearchRange(new int[] { 5, 7, 7, 8, 8, 10 }, 8)));
+            Console.WriteLine(string.Join(",", SearchRange(new int[] { 5, 7, 7, 8, 8, 10 }, 6)));
+            Console.WriteLine(string.Join(",", SearchRange(Array.Empty<int>(), 0)));
         }
     }
 }
