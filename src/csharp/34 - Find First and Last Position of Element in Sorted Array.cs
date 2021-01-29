@@ -6,6 +6,7 @@ namespace CSharpConsoleApp
     {
         static int[] SearchRange(int[] nums, int target)
         {
+            // 尝试定位到任意目标数字
             int BinarySearch()
             {
                 if (nums[0] == target)
@@ -47,6 +48,7 @@ namespace CSharpConsoleApp
                 return new int[] { -1, -1 };
             }
 
+            // 尝试向前扩展
             var start = 0;
             if (nums[0] != target)
             {
@@ -71,6 +73,7 @@ namespace CSharpConsoleApp
                 start = s;
             }
 
+            // 尝试向后扩展
             var end = nums.Length - 1;
             if (nums[^1] != target)
             {
