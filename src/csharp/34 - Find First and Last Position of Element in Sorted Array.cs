@@ -4,101 +4,132 @@ namespace CSharpConsoleApp
 {
     class Program
     {
+        #region Binary Search
+        //static int[] SearchRange(int[] nums, int target)
+        //{
+        //    int BinarySearch()
+        //    {
+        //        if (nums[0] == target)
+        //        {
+        //            return 0;
+        //        }
+        //        if (nums[^1] == target)
+        //        {
+        //            return nums.Length - 1;
+        //        }
+        //        var (start, end) = (0, nums.Length - 1);
+        //        while (true)
+        //        {
+        //            var middle = (start + end) / 2;
+        //            if (nums[middle] == target)
+        //            {
+        //                return middle;
+        //            }
+        //            if (start == middle || end == middle)
+        //            {
+        //                break;
+        //            }
+        //            if (nums[middle] > target)
+        //            {
+        //                end = middle;
+        //            }
+        //            else
+        //            {
+        //                start = middle;
+        //            }
+        //        }
+
+        //        return -1;
+        //    }
+
+        //    var random = nums.Length == 0 ? -1 : BinarySearch();
+        //    if (random == -1)
+        //    {
+        //        return new int[] { -1, -1 };
+        //    }
+
+        //    var start = 0;
+        //    if (nums[0] != target)
+        //    {
+        //        var (s, e) = (1, random);
+        //        while (!(nums[s - 1] != target && nums[s] == target))
+        //        {
+        //            var m = (s + e) / 2;
+        //            if (m == s)
+        //            {
+        //                s++;
+        //                break;
+        //            }
+        //            if (nums[m] == target)
+        //            {
+        //                e = m;
+        //            }
+        //            else
+        //            {
+        //                s = m;
+        //            }
+        //        }
+        //        start = s;
+        //    }
+
+        //    var end = nums.Length - 1;
+        //    if (nums[^1] != target)
+        //    {
+        //        var (s, e) = (random, nums.Length - 1);
+        //        while (!(nums[s + 1] != target && nums[s] == target))
+        //        {
+        //            var m = (s + e) / 2;
+        //            if (m == s)
+        //            {
+        //                s--;
+        //                break;
+        //            }
+        //            if (nums[m] == target)
+        //            {
+        //                s = m;
+        //            }
+        //            else
+        //            {
+        //                e = m;
+        //            }
+        //        }
+        //        end = s;
+        //    }
+        //    return new int[] { start, end };
+        //}
+        #endregion
+
+        #region Optimized Binary Search
         static int[] SearchRange(int[] nums, int target)
         {
-            // 尝试定位到任意目标数字
-            int BinarySearch()
+
+            int Bound(bool left)
             {
-                if (nums[0] == target)
-                {
-                    return 0;
-                }
-                if (nums[^1] == target)
-                {
-                    return nums.Length - 1;
-                }
                 var (start, end) = (0, nums.Length - 1);
-                while (true)
+                while (start < end)
                 {
-                    var middle = (start + end) / 2;
-                    if (nums[middle] == target)
+                    var mid = (start + end) / 2;
+                    if (nums[mid] > target || (left && nums[mid] == target))
                     {
-                        return middle;
-                    }
-                    if (start == middle || end == middle)
-                    {
-                        break;
-                    }
-                    if (nums[middle] > target)
-                    {
-                        end = middle;
+                        end = mid;
                     }
                     else
                     {
-                        start = middle;
+                        start = mid + 1;
                     }
                 }
-
-                return -1;
+                return start;
             }
 
-            var random = nums.Length == 0 ? -1 : BinarySearch();
-            if (random == -1)
+            var left = Bound(true);
+            if (left == nums.Length || nums[left] != target)
             {
                 return new int[] { -1, -1 };
             }
 
-            // 尝试向前扩展
-            var start = 0;
-            if (nums[0] != target)
-            {
-                var (s, e) = (1, random);
-                while (!(nums[s-1] != target && nums[s] == target))
-                {
-                    var m = (s + e) / 2;
-                    if (m == s)
-                    {
-                        s++;
-                        break;
-                    }
-                    if (nums[m] == target)
-                    {
-                        e = m;
-                    }
-                    else
-                    {
-                        s = m;
-                    }
-                }
-                start = s;
-            }
-
-            // 尝试向后扩展
-            var end = nums.Length - 1;
-            if (nums[^1] != target)
-            {
-                var (s, e) = (random, nums.Length-1);
-                while (!(nums[s + 1] != target && nums[s] == target))
-                {
-                    var m = (s + e) / 2;
-                    if (m == s)
-                    {
-                        s--;
-                        break;
-                    }
-                    if (nums[m] == target)
-                    {
-                        s = m;
-                    }
-                    else
-                    {
-                        e = m;
-                    }
-                }
-                end = s;
-            }
-            return new int[] { start, end };
+            return new int[] { left, Bound(false) - 1 };
         }
+        #endregion
 
         static void Main(string[] args)
         {
