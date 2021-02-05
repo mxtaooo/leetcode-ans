@@ -31,6 +31,7 @@ namespace CSharpConsoleApp
                 }
             }
 
+            // 若是nums中仅有一个元素、则会跳过二分过程直接到达此处
             return nums[start] >= target ? start : (start + 1);
         }
 
