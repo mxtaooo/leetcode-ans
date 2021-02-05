@@ -31,7 +31,7 @@ namespace CSharpConsoleApp
                 }
             }
 
-            return nums[start] > target ? start : (start + 1);
+            return nums[start] >= target ? start : (start + 1);
         }
 
         static void Main(string[] args)
@@ -46,7 +46,8 @@ namespace CSharpConsoleApp
             Console.WriteLine(Search(new int[] { 1, 3, 5, 6 }, 6));
             Console.WriteLine(Search(new int[] { 1, 3, 5, 6 }, 7));
             Console.WriteLine(Search(new int[] { 1 }, 0));
-
+            Console.WriteLine(Search(new int[] { 1 }, 1));
+            Console.WriteLine(Search(new int[] { 1 }, 2));
         }
     }
 }
