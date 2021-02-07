@@ -50,3 +50,6 @@ Output: false
 Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
 ```
 
+## 题目分析
+
+这道题目感觉也就是简单难度，比较棘手的是快速判断某个集合中的元素是否存在重复。当前实现借助了`Set`
