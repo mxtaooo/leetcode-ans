@@ -51,3 +51,7 @@ Explanation: The input board is shown left and the only valid solution is shown 
 + `board[i][j]` is a digit or `'.'`.
 + It is **guaranteed** that the input board has only one solution.
 
+## 题目分析
+
+从人类的直觉来完成这道题，是选择“已填充”最多的，尝试填上所有的、然后以之为基础将填充区域“放大”、
+
