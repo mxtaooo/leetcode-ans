@@ -55,3 +55,4 @@ Explanation: The input board is shown left and the only valid solution is shown 
 
 从人类的直觉来完成这道题，是选择“已填充”最多的，尝试填上所有的、然后以之为基础将填充区域“放大”、
 
+来个答案 https://leetcode-cn.com/problems/sudoku-solver/solution/jie-shu-du-by-leetcode-solution/
