@@ -56,3 +56,9 @@ Explanation: The input board is shown left and the only valid solution is shown 
 从人类的直觉来完成这道题，是选择“已填充”最多的，尝试填上所有的、然后以之为基础将填充区域“放大”、
 
 来个答案 https://leetcode-cn.com/problems/sudoku-solver/solution/jie-shu-du-by-leetcode-solution/
+
+简要步骤
+
+1. 首先尝试填充所有“单候选”空白位置（依据该空白位置的行、列、九宫格确定、某些位置确定后会进一步影响其它位置、因此会需要循环处理）
+2. DFS填充所有多候选的空白、只是这一过程会需要回溯、回溯的进行过程还需深入思考
+
