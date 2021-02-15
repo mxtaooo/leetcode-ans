@@ -48,3 +48,7 @@ Output: [[1,1]]
 + `1 <= candidates[i] <= 200`
 + All elements of `candidates` are **distinct**.
 + `1 <= target <= 500`
+
+## 题目分析
+
+https://leetcode-cn.com/problems/combination-sum/solution/zu-he-zong-he-by-leetcode-solution/
