@@ -51,4 +51,8 @@ Output: [[1,1]]
 
 ## 题目分析
 
+当前实现采用渐进式解法、从`1`逐渐逼近`target`。因为任意数字都是“单子”或“和”，任意“和”都是“两元素”之和，其中的“元素”可能是多个“更小元素”的和。
+
+当前优化点在于改进、使之能更快速判断两`list`相同。
+
 https://leetcode-cn.com/problems/combination-sum/solution/zu-he-zong-he-by-leetcode-solution/
