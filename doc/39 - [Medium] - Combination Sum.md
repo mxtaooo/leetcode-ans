@@ -55,4 +55,10 @@ Output: [[1,1]]
 
 当前优化点在于改进、使之能更快速判断两`list`相同。
 
+<!--  -->
+
+将同样的思路用F#描述出来、相对更简洁高效、因为F#内置不可变List结构、有序情况下能直接进行等值比较
+
+当前实现的一大瓶颈还是在于两List相等判断上
+
 https://leetcode-cn.com/problems/combination-sum/solution/zu-he-zong-he-by-leetcode-solution/
