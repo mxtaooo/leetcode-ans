@@ -62,3 +62,5 @@ Output: [[1,1]]
 当前实现的一大瓶颈还是在于两List相等判断上
 
 https://leetcode-cn.com/problems/combination-sum/solution/zu-he-zong-he-by-leetcode-solution/
+
+题解给出的方案是搜索回溯+剪枝；
