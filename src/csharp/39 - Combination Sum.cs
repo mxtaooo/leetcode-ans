@@ -83,6 +83,12 @@ namespace CSharpConsoleApp
             return result;
         }
 
+        // todo: 考虑DFS
+        static IList<IList<int>> CombinationSum(int[] candidates, int target)
+        {
+  
+        }
+
         static string Format(IList<IList<int>> list)
         {
             return $"[{string.Join(",", list.Select(l => $"[{string.Join(",", l)}]"))}]";
