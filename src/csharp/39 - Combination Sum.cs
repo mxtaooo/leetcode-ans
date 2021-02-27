@@ -86,7 +86,19 @@ namespace CSharpConsoleApp
         // todo: 考虑DFS
         static IList<IList<int>> CombinationSum(int[] candidates, int target)
         {
-  
+            var result = new List<IList<int>>();
+
+            IList<IList<int>> DFS(int target, int index, IList<int> combine)
+            {
+                var @string = "";
+
+                if (candidates.Length <= index)
+                {
+                    return new();
+                }
+            }
+
+            return result;
         }
 
         static string Format(IList<IList<int>> list)
