@@ -90,11 +90,12 @@ namespace CSharpConsoleApp
 
             IList<IList<int>> DFS(int target, int index, IList<int> combine)
             {
-                var @string = "";
-
                 if (candidates.Length <= index)
                 {
-                    return new();
+                    return new List<IList<int>>() 
+                        {
+                            combine
+                        };
                 }
             }
 
