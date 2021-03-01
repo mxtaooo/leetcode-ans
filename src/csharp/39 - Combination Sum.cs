@@ -83,22 +83,31 @@ namespace CSharpConsoleApp
             return result;
         }
 
-        // todo: 考虑DFS
+        // todo: incorrect
         static IList<IList<int>> CombinationSum(int[] candidates, int target)
         {
             var result = new List<IList<int>>();
 
-            IList<IList<int>> DFS(int target, int index, IList<int> combine)
+            void DFS(int target, int index, IList<int> combine)
             {
-                if (candidates.Length <= index)
+                if (candidates.Length == index)
                 {
-                    return new List<IList<int>>() 
-                        {
-                            combine
-                        };
+                    return;
+                }
+                if (target == 0)
+                {
+                    result.Add(new List<int>(combine));
+                    return;
+                }
+                DFS(target, index + 1, combine);
+                if (target - candidates[index] >= 0)
+                {
+                    combine.Add(candidates[index]);
+                    DFS(target - candidates[index], index, combine);
+                    combine.Remove(combine.Count - 1);
                 }
             }
-
+            DFS(target, 0, new List<int>());
             return result;
         }
 
