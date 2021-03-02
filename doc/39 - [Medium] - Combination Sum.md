@@ -56,6 +56,8 @@ Output: [[1,1]]
 
 中文力扣给出的[参考思路](https://leetcode-cn.com/problems/combination-sum/solution/zu-he-zong-he-by-leetcode-solution/)是搜索回溯+剪枝。仔细看了下是DFS的应用、算是正向的构建。尝试得到`target`过程中，减去已选择的元素，再尝试构建出差。
 
+<!-- 题解给出的解法似乎存在问题、未能顺利解决集合复用的问题 -->
+
 <!-- todo: 尝试DFS解法 -->
 
 DFS是经典解法、需要考虑清楚起始、转移方法、结束状态
