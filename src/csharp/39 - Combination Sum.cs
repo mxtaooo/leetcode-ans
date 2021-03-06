@@ -100,3 +100,54 @@ namespace CSharpConsoleApp
     }
 }
 #endregion
+
+#region DFS Solution
+namespace DFS
+{
+    class Program
+    {
+
+        static void DFS(int[] candidates, int target, IList<IList<int>> result, IList<int> combine, int idx)
+        {
+            if (idx == candidates.Length)
+            {
+                return;
+            }
+            if (target == 0)
+            {
+                result.Add(new List<int>(combine));
+                return;
+            }
+            DFS(candidates, target, result, combine, idx + 1);
+            if (target - candidates[idx] >= 0)
+            {
+                combine.Add(candidates[idx]);
+                DFS(candidates, target - candidates[idx], result, combine, idx);
+                combine.Remove(combine.Count - 1);
+            }
+        }
+
+        static IList<IList<int>> CombinationSum(int[] candidates, int target)
+        {
+            var result = new List<IList<int>>();
+            var combine = new List<int>();
+            DFS(candidates, target, result, combine, 0);
+            return result;
+        }
+
+        static string Format(IList<IList<int>> list)
+        {
+            return $"[{string.Join(",", list.Select(l => $"[{string.Join(",", l)}]"))}]";
+        }
+
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello World!");
+            Console.WriteLine(Format(CombinationSum(new int[] { 2, 3, 5 }, 8)));
+            Console.WriteLine(Format(CombinationSum(new int[] { 2 }, 1)));
+            Console.WriteLine(Format(CombinationSum(new int[] { 1 }, 1)));
+            Console.WriteLine(Format(CombinationSum(new int[] { 1 }, 2)));
+        }
+    }
+}
+#endregion
