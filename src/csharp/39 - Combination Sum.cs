@@ -106,7 +106,6 @@ namespace DFS
 {
     class Program
     {
-
         static void DFS(int[] candidates, int target, IList<IList<int>> result, IList<int> combine, int idx)
         {
             if (idx == candidates.Length)
@@ -123,7 +122,7 @@ namespace DFS
             {
                 combine.Add(candidates[idx]);
                 DFS(candidates, target - candidates[idx], result, combine, idx);
-                combine.Remove(combine.Count - 1);
+                combine.RemoveAt(combine.Count - 1);
             }
         }
 
