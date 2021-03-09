@@ -16,13 +16,28 @@ let combinationSum ints target =
         if set.Count > 0 then dict.[i] <- set
     dict.GetValueOrDefault(target, new HashSet<int list>()) |> List.ofSeq
 
+let combinationSumII (ints: int array) target = 
+    let result = new List<IList<int>>()
+    let rec dfs target (combine: IList<int>) idx =
+        if idx = ints.Length then ()
+        elif target = 0 then result.Add(new List<int>(combine)); ()
+        else
+            dfs target combine (idx + 1)
+            if target >= ints.[idx] then
+                combine.Add(ints.[idx])
+                dfs (target - ints.[idx]) combine idx
+                combine.RemoveAt(combine.Count-1)
+            else ()
+    dfs target (new List<int>()) 0
+    result
+
 [<EntryPoint>]
 let main argv =
     printfn "Hello World from F#!"
 
-    ([|2;3;5|], 8) ||> combinationSum |> printfn "%A"
-    ([|2|], 1) ||> combinationSum |> printfn "%A"
-    ([|1|], 1) ||> combinationSum |> printfn "%A"
-    ([|1|], 2) ||> combinationSum |> printfn "%A"
+    ([|2;3;5|], 8) ||> combinationSumII |> printfn "%A"
+    ([|2|], 1) ||> combinationSumII |> printfn "%A"
+    ([|1|], 1) ||> combinationSumII |> printfn "%A"
+    ([|1|], 2) ||> combinationSumII |> printfn "%A"
 
     0
