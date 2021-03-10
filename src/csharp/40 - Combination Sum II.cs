@@ -6,7 +6,6 @@ namespace CSharpConsoleApp
 {
     class Program
     {
-
         static IList<IList<int>> CombinationSum(int[] candidates, int target)
         {
             var result = new List<IList<int>>();
@@ -43,7 +42,7 @@ namespace CSharpConsoleApp
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("CombinationSumII");
             Console.WriteLine(Format(CombinationSum(new int[] { 10, 1, 2, 7, 6, 1, 5 }, 8)));
             Console.WriteLine(Format(CombinationSum(new int[] { 2, 5, 2, 1, 2 }, 5)));
             Console.WriteLine(Format(CombinationSum(new int[] { 1 }, 1)));
