@@ -32,6 +32,7 @@ namespace CSharpConsoleApp
 
             var combine = new List<int>();
             DFS(target, combine, 0);
+            // 需要对result中的元素去重
             return result;
         }
 
