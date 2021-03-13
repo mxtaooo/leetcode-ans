@@ -19,8 +19,8 @@ let combinationSum ints target =
 let combinationSumII (ints: int array) target = 
     let result = new List<IList<int>>()
     let rec dfs target (combine: IList<int>) idx =
-        if idx = ints.Length then ()
-        elif target = 0 then result.Add(new List<int>(combine)); ()
+        if target = 0 then result.Add(new List<int>(combine)); ()
+        elif idx = ints.Length then ()
         else
             dfs target combine (idx + 1)
             if target >= ints.[idx] then
