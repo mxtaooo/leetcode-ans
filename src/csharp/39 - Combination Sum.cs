@@ -90,13 +90,13 @@ namespace CSharpConsoleApp
 
             void DFS(int target, IList<int> combine, int idx)
             {
-                if (idx == candidates.Length)
-                {
-                    return;
-                }
                 if (target == 0)
                 {
                     result.Add(new List<int>(combine));
+                    return;
+                }
+                if (idx == candidates.Length)
+                {
                     return;
                 }
                 DFS(target, combine, idx + 1);
