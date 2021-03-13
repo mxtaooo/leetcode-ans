@@ -6,19 +6,60 @@ namespace CSharpConsoleApp
 {
     class Program
     {
-        static IList<IList<int>> CombinationSum(int[] candidates, int target)
+        private class IntListComparer : IEqualityComparer<IList<int>>
         {
-            var result = new List<IList<int>>();
+            public bool Equals(IList<int>? x, IList<int>? y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (x != null && y != null && x.Count == y.Count)
+                {
+                    var list1 = new List<int>(x);
+                    list1.Sort();
+                    var list2 = new List<int>(y);
+                    list2.Sort();
+                    for (int i = 0; i < list1.Count; i++)
+                    {
+                        if (list1[i] != list2[i])
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+                return false;
+            }
+
+            public int GetHashCode(IList<int> list)
+            {
+                var tmp = new List<int>(list);
+                tmp.Sort();
+                unchecked
+                {
+                    int hash = 19;
+                    foreach (var i in tmp)
+                    {
+                        hash = hash * 31 + i.GetHashCode();
+                    }
+                    return hash;
+                }
+            }
+        }
+
+        private static readonly IEqualityComparer<IList<int>> comparer = new IntListComparer();
+
+        static IList<IList<int>> CombinationSum2(int[] candidates, int target)
+        {
+            var result = new HashSet<IList<int>>(comparer);
 
             void DFS(int target, IList<int> combine, int idx)
             {
-                if (idx == candidates.Length)
-                {
-                    return;
-                }
                 if (target == 0)
                 {
                     result.Add(new List<int>(combine));
+                    return;
+                }
+                if (idx == candidates.Length)
+                {
                     return;
                 }
                 DFS(target, combine, idx + 1);
@@ -32,8 +73,7 @@ namespace CSharpConsoleApp
 
             var combine = new List<int>();
             DFS(target, combine, 0);
-            // 需要对result中的元素去重
-            return result;
+            return new List<IList<int>>(result);
         }
 
         static string Format(IList<IList<int>> list)
@@ -43,11 +83,11 @@ namespace CSharpConsoleApp
 
         static void Main(string[] args)
         {
-            Console.WriteLine("CombinationSumII");
-            Console.WriteLine(Format(CombinationSum(new int[] { 10, 1, 2, 7, 6, 1, 5 }, 8)));
-            Console.WriteLine(Format(CombinationSum(new int[] { 2, 5, 2, 1, 2 }, 5)));
-            Console.WriteLine(Format(CombinationSum(new int[] { 1 }, 1)));
-            Console.WriteLine(Format(CombinationSum(new int[] { 1 }, 2)));
+            Console.WriteLine("Hello World!");
+            Console.WriteLine(Format(CombinationSum2(new int[] { 10, 1, 2, 7, 6, 1, 5 }, 8)));
+            Console.WriteLine(Format(CombinationSum2(new int[] { 2, 5, 2, 1, 2 }, 5)));
+            Console.WriteLine(Format(CombinationSum2(new int[] { 1 }, 1)));
+            Console.WriteLine(Format(CombinationSum2(new int[] { 1 }, 2)));
         }
     }
 }
