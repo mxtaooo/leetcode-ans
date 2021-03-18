@@ -17,18 +17,16 @@ open System.Collections.Generic
 //     dict.GetValueOrDefault(target, new HashSet<int list>()) |> List.ofSeq
 
 let combinationSumII (ints: int array) target = 
-    let result = new List<IList<int>>()
-    let rec dfs target (combine: IList<int>) idx =
-        if target = 0 then result.Add(new List<int>(combine)); ()
+    let result = new HashSet<int list>()
+    let rec dfs target (combine: int list) idx =
+        if target = 0 then result.Add(combine |> List.sort) |> ignore; ()
         elif idx = ints.Length then ()
         else
             dfs target combine (idx + 1)
             if target >= ints.[idx] then
-                combine.Add(ints.[idx])
-                dfs (target - ints.[idx]) combine idx
-                combine.RemoveAt(combine.Count-1)
+                dfs (target - ints.[idx]) (ints.[idx] :: combine) idx
             else ()
-    dfs target (new List<int>()) 0
+    dfs target [] 0
     result
 
 [<EntryPoint>]
