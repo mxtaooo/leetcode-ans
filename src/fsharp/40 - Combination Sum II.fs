@@ -8,7 +8,7 @@ let combinationSumII (ints: int array) target =
         else
             dfs target combine (idx + 1)
             if target >= ints.[idx] then
-                dfs (target - ints.[idx]) (ints.[idx] :: combine) idx
+                dfs (target - ints.[idx]) (ints.[idx] :: combine) (idx + 1)
             else ()
     dfs target [] 0
     result |> List.map List.sort |> List.distinct
