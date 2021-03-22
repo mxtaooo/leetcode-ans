@@ -41,3 +41,7 @@ Output:
 ## 题目分析
 
 基于39题的递归解法进行简单修改、此外加入判断两集合是否一致的操作、即为正确解法
+
+
+https://leetcode-cn.com/problems/combination-sum-ii/solution/zu-he-zong-he-ii-by-leetcode-solution/
+
