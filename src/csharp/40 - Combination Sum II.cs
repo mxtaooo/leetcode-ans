@@ -9,7 +9,6 @@ namespace CSharpConsoleApp
 
         static IList<IList<int>> CombinationSum2(int[] candidates, int target)
         {
-            // todo: HERE
             var result = new HashSet<IList<int>>(comparer);
 
             void DFS(int target, IList<int> combine, int idx)
