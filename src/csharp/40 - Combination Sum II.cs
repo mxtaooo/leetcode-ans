@@ -25,25 +25,20 @@ namespace CSharpConsoleApp
                     result.Add(new List<int>(combine));
                     return;
                 }
-                if (idx == list.Count)
+                if (target < 0 || idx == list.Count)
                 {
                     return;
                 }
                 DFS(target, combine, idx + 1);
                 for (int i = 0; i < list[idx].Value; i++)
                 {
-                    if (target - (list[idx].Key * (i+1)) >= 0)
-                    {
-                        for (int c = 0; c <= i; c++)
-                        {
-                            combine.Add(candidates[idx]);
-                        }
-                        DFS(target - candidates[idx], combine, idx + 1);
-                        for (int c = 0; c <= i; c++)
-                        {
-                            combine.RemoveAt(combine.Count - 1);
-                        }
-                    }
+                    target -= list[idx].Key;
+                    combine.Add(list[idx].Key);
+                    DFS(target, combine, idx + 1);
+                }
+                for (int i = 0; i < list[idx].Value; i++)
+                {
+                    combine.RemoveAt(combine.Count - 1);
                 }
             }
 
