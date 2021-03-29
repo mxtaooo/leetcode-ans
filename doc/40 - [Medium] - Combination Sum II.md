@@ -45,3 +45,6 @@ Output:
 但以上去重解法过于粗暴、需要有更优雅的方式进行去重
 
 https://leetcode-cn.com/problems/combination-sum-ii/solution/zu-he-zong-he-ii-by-leetcode-solution/
+
+
+update：实现方式已更改、现无需主动判断两集合是否一致
