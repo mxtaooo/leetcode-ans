@@ -52,3 +52,8 @@ Constraints:
 基于`*`先将`p`切分，然后按顺序进行`index of`操作
 
 // 似乎只是思路一的改进，并没有本质的效率提升？
+
+### 思路三
+
+参考[leetcode Question 123: Wildcard Matching](http://yucoding.blogspot.com/2013/02/leetcode-question-123-wildcard-matching.html)和[Linear runtime and constant space solution](https://leetcode.com/problems/wildcard-matching/solutions/17810/linear-runtime-and-constant-space-solution/)
+

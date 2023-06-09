@@ -164,4 +164,39 @@ class Solution
         }
         return -1;
     }
+
+    
+    public bool Impl3(string s, string p)
+    {
+        int star = -1, sub = -1, i = 0, j = 0;
+        while (i < s.Length) 
+        {
+            if (j < p.Length && (s[i] == p[j] || p[j] == '?'))
+            {
+                i++;
+                j++;
+                continue;
+            }
+            if (j < p.Length && p[j] == '*')
+            {
+                star = j;
+                j++;
+                sub = i;
+                continue;
+            }
+            if (star != -1)
+            {
+                j = star + 1;
+                sub++;
+                i = sub;
+                continue;
+            }
+            return false;
+        }
+        while (j < p.Length && p[j] == '*')
+        {
+            j++;
+        }
+        return j == p.Length;
+    }
 }
