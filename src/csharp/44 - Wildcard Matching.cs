@@ -1,4 +1,6 @@
 
+namespace ConsoleApp;
+
 class Solution
 {
     public static void Main(string[] args)
@@ -15,6 +17,9 @@ class Solution
         Console.WriteLine($"{solution.IsMatch("abcde", "ab*?e")}");
         Console.WriteLine($"{solution.IsMatch("abcde", "*?e")}");
         Console.WriteLine($"{solution.IsMatch("abcde", "*?")}");
+        Console.WriteLine($"{solution.IsMatch("adceb", "*a*b")}");
+        Console.WriteLine($"{solution.IsMatch("adceb", "**a*b")}");
+        Console.WriteLine($"{solution.IsMatch("", "***")}");
 
         Console.WriteLine($"####################[UNMATCHED]####################");
         Console.WriteLine($"{solution.IsMatch("abbabaaabbabbaababbabbbbbabbbabbbabaaaaababababbbabababaabbababaabbbbbbaaaabababbbaabbbbaabbbbababababbaabbaababaabbbababababbbbaaabbbbbabaaaabbababbbbaababaabbababbbbbababbbabaaaaaaaabbbbbaabaaababaaaabb", "**aa*****ba*a*bb**aa*ab****a*aaaaaa***a*aaaa**bbabb*b*b**aaaaaaaaa*a********ba*bbb***a*ba*bb*bb**a*b*bb")}");
@@ -25,7 +30,7 @@ class Solution
 
     public bool IsMatch(string s, string p)
     {
-        return Impl2(s, p);
+        return Impl4(s, p);
     }
 
     public bool Impl1(string s, string p)
@@ -165,7 +170,6 @@ class Solution
         return -1;
     }
 
-    
     public bool Impl3(string s, string p)
     {
         int star = -1, sub = -1, i = 0, j = 0;
@@ -199,4 +203,35 @@ class Solution
         }
         return j == p.Length;
     }
+
+    public bool Impl4(string s, string p)
+    {
+        bool[,] dp = new bool[p.Length+1, s.Length+1];
+        dp[0,0] = true;
+        for (int i = 0; i < p.Length; i++)
+        {
+            if (p[i] == '*')
+            {
+                dp[i+1, 0] = dp[i, 0];
+            }
+        }
+        for (int i = 1; i <= p.Length; i++)
+        {
+            for (int j = 1; j <= s.Length; j++)
+            {
+                if (p[i-1] == '*')
+                {
+                    dp[i, j] = dp[i - 1, j] || dp[i, j - 1];
+                }
+                else 
+                {
+                    dp[i, j] = dp[i-1, j-1] && (s[j-1] == p[i-1] || p[i-1] == '?');
+                }
+            }
+        }
+
+        return dp[p.Length, s.Length];
+    }
+
+
 }

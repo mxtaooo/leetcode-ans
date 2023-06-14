@@ -68,3 +68,12 @@ Constraints:
 
 该思路是相对最高效的实现，时间复杂度最坏为`O(mn)`，空间复杂度`O(1)`
 
+### 思路四
+
+动态规划方法
+
+参考了[https://leetcode.com/problems/wildcard-matching/solutions/17812/my-java-dp-solution-using-2d-table/comments/17699](https://leetcode.com/problems/wildcard-matching/solutions/17812/my-java-dp-solution-using-2d-table/comments/17699)
+
+定义二维布尔数组`dp`，数组中的任意元素`dp[i][j]`表示模式`p`的前`i`个字符是否能匹配字符串`s`的前`j`个字符。（注意数组中的位置与字符串位置的对应关系）
+状态转移规则如下：对`dp[i][j]`，查看其对应位置的`p`，即`p[i-1]`，若为`?`或普通字符，则其状态应参考当前位置匹配状态及`dp[i-1][j-1]`（即左上方）；若为`*`，则状态应参考`dp[i][j-1]`（即左侧，表示`*`在左侧状态基础上再多吃掉了一个字符）或`dp[i-1][j]`（即上侧，表示`*`在上方状态基础上没有吃掉任何字符）
+初始状态：`dp[0][0]`表示空模式匹配空字符串，因此必定为`true`；若模式`p`第一个字符是`*`，则数组第一行其余元素为`true`；遍历模式`p`，设定数组第一列，若遇见`*`，则对应位置的`dp[i][0]`取决于`dp[i-1][0]`
