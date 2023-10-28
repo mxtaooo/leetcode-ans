@@ -21,7 +21,7 @@ Problems:
 + Linked List
 + Binary Tree General
 + Binary Tree BFS
-+ Binary Tree BFS
++ Binary Search Tree
 + Graph General
 + Graph BFS
 + Trie
@@ -33,5 +33,10 @@ Problems:
 + Bit Manipulation
 + Math
 + 1D DP
+  + [70. Climbing Stairs](https://leetcode.com/problems/climbing-stairs/)
+  + [198. House Robber](https://leetcode.com/problems/house-robber/)
+  + [139. Word Break](https://leetcode.com/problems/word-break/)
+  + [322. Coin Change](https://leetcode.com/problems/coin-change/)
+  + [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) **TODO**
 + Multidimensional DP
 
