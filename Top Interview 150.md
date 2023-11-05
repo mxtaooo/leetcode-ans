@@ -39,4 +39,6 @@ Problems:
   + [322. Coin Change](https://leetcode.com/problems/coin-change/)
   + [300. Longest Increasing Subsequence](https://leetcode.com/problems/longest-increasing-subsequence/) **TODO**
 + Multidimensional DP
-
+  + [120. Triangle](https://leetcode.com/problems/triangle/) **TODO**
+  + [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
+  + [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/)
