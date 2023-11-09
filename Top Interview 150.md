@@ -42,3 +42,4 @@ Problems:
   + [120. Triangle](https://leetcode.com/problems/triangle/) **TODO**
   + [64. Minimum Path Sum](https://leetcode.com/problems/minimum-path-sum/)
   + [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/)
+  + [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
