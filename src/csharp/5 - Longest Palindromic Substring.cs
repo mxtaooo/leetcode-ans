@@ -64,6 +64,69 @@ class Solution
         return s.Substring(start, len);
     }
 
+    // 动态规划 - 2023-11-09新增
+    public string LongestPalindrome(string s)
+    {
+        if (string.IsNullOrEmpty(s))
+        {
+            return string.Empty;
+        }
+
+        var dp = new bool[s.Length, s.Length];
+        var maxLen = 1;
+        var maxStart = 0;
+
+        for (int l = 1; l <= s.Length; l++)
+        {
+            for (int i = 0; i < s.Length - l + 1; i++)
+            {
+                var j = i + l - 1;
+                if (s[i] == s[j] && (i + 1 > j - 1 || dp[i + 1, j - 1]))
+                {
+                    dp[i, j] = true;
+                    if (l > maxLen)
+                    {
+                        maxLen = l;
+                        maxStart = i;
+                    }
+                }
+            }
+        }
+
+        return s.Substring(maxStart, maxLen);
+    }
+
+    // 动态规划 - 2023-11-09新增
+    public string LongestPalindrome(string s) {
+        if (string.IsNullOrEmpty(s))
+        {
+            return string.Empty;
+        }
+
+        var dp = new BitArray(s.Length * s.Length);
+        var maxLen = 1;
+        var maxStart = 0;
+
+        for (int l = 1; l <= s.Length; l++)
+        {
+            for (int i = 0; i < s.Length - l + 1; i++)
+            {
+                var j = i + l - 1;
+                if (s[i] == s[j] && (i + 1 > j - 1 || dp[(i + 1) * s.Length + j - 1]))
+                {
+                    dp[i * s.Length + j] = true;
+                    if (l > maxLen)
+                    {
+                        maxLen = l;
+                        maxStart = i;
+                    }
+                }
+            }
+        }
+
+        return s.Substring(maxStart, maxLen);
+    }
+
     static void Main(string[] args)
     {
         Console.WriteLine($"abcba: {LongestPalindrome("abcba")}");
