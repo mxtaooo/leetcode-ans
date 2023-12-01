@@ -44,3 +44,7 @@ Problems:
   + [63. Unique Paths II](https://leetcode.com/problems/unique-paths-ii/)
   + [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
   + [97. Interleaving String](https://leetcode.com/problems/interleaving-string/)
+  + [72. Edit Distance](https://leetcode.com/problems/edit-distance/)
+  + [123. Best Time to Buy and Sell Stock III](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/)
+  + [188. Best Time to Buy and Sell Stock IV](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/)
+  + [221. Maximal Square](https://leetcode.com/problems/maximal-square/)
